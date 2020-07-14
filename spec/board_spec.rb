@@ -144,4 +144,33 @@ describe Board do
       expect(game_board.draw?).to be true
     end
   end
+
+  context '#display' do
+    it 'displays the grid' do
+      grid = [
+        [n, n, n, n, n, n, x],
+        [x, n, n, x, o, o, x],
+        [o, n, x, o, o, x, o],
+        [x, x, o, x, o, x, x],
+        [o, x, o, o, x, o, x],
+        [o, x, o, o, x, o, x]
+      ]
+      allow(game_board).to receive(:grid).and_return(grid)
+      expect { game_board.display }.to output("""
+|     |     |     |     |     |     |  x  |
+-------------------------------------------
+|  x  |     |     |  x  |  o  |  o  |  x  |
+-------------------------------------------
+|  o  |     |  x  |  o  |  o  |  x  |  o  |
+-------------------------------------------
+|  x  |  x  |  o  |  x  |  o  |  x  |  x  |
+-------------------------------------------
+|  o  |  x  |  o  |  o  |  x  |  o  |  x  |
+-------------------------------------------
+|  o  |  x  |  o  |  o  |  x  |  o  |  x  |
+-------------------------------------------
+|  1  |  2  |  3  |  4  |  5  |  6  |  7  |
+""").to_stdout
+    end
+  end
 end

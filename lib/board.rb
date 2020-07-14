@@ -35,6 +35,18 @@ class Board
     true
   end
 
+  def display
+    puts
+    grid.each do |row|
+      data_row = row.map do |cell|
+        cell.data || ' '
+      end
+      puts "|  #{data_row.join('  |  ')}  |"
+      puts '-------------------------------------------'
+    end
+    puts "|  #{[1, 2, 3, 4, 5, 6, 7].join('  |  ')}  |"
+  end
+
   private
 
   def create_grid
@@ -65,3 +77,11 @@ class Board
     match(row, column, pos, marker, count)
   end
 end
+
+# board = Board.new
+# board.place_piece(0, 2, 'x')
+# board.place_piece(1, 2, 'x')
+# board.place_piece(2, 2, 'x')
+# board.place_piece(3, 2, 'x')
+
+# board.display
