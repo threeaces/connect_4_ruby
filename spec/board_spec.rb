@@ -36,8 +36,8 @@ describe Board do
 
   context '#find_valid_row' do
     it 'returns false if the column is full' do
-      Square = Struct.new(:data)
-      allow(default_board).to receive(:get_cell).and_return(Square.new('test'))
+      cell_with_data = double('cell', data: 'something')
+      allow(default_board).to receive(:get_cell).and_return(cell_with_data)
       expect(default_board.find_valid_row(2)).to be false
     end
     it 'finds the lowest empty position in the column' do
@@ -48,10 +48,9 @@ describe Board do
   end
 
   subject(:game_board) { described_class.new }
-  Square = Struct.new(:data)
-  o = Square.new('o')
-  x = Square.new('x')
-  n = Square.new(nil)
+  let(:o) { double('cell', data: 'o') }
+  let(:x) { double('cell', data: 'x') }
+  let(:n) { double('cell', data: nil) }
 
   context '#win?' do
     it 'returns false when the column does not have 4 consecutive match' do
