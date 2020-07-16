@@ -5,7 +5,7 @@ class Board
 
   def initialize
     @grid = create_grid
-    @positions = get_adjacent_cells
+    @positions = get_adjacent_positions
   end
 
   def get_cell(row, column)
@@ -31,8 +31,7 @@ class Board
   end
 
   def draw?
-    grid.flatten.each { |cell| return false if cell.data.nil? }
-    true
+    grid.flatten.none? { |cell| cell.data.nil? }
   end
 
   def display
@@ -53,7 +52,7 @@ class Board
     Array.new(6) { Array.new(7) { Cell.new } }
   end
 
-  def get_adjacent_cells(cells = [])
+  def get_adjacent_positions(cells = [])
     [1, 0, -1].each do |y|
       [0, 1, -1].each do |x|
         next if y.zero? && x.zero? || y == -1 && x.zero?
@@ -77,11 +76,3 @@ class Board
     match(row, column, pos, marker, count)
   end
 end
-
-# board = Board.new
-# board.place_piece(0, 2, 'x')
-# board.place_piece(1, 2, 'x')
-# board.place_piece(2, 2, 'x')
-# board.place_piece(3, 2, 'x')
-
-# board.display

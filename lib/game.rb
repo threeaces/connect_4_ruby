@@ -20,7 +20,7 @@ class Game
       if !valid?(input)
         puts 'Please enter a valid column'
       elsif full?(input)
-        puts 'The column is full. Please pick different column'
+        puts 'The column is full. Please select a different column'
       else
         return input
       end
@@ -30,6 +30,7 @@ class Game
   def play
     board.display
     loop do
+      puts
       puts "#{players[0].name}, please select a column to place your piece"
       column = prompt_move.to_i - 1
       row = board.find_valid_row(column)
@@ -51,11 +52,15 @@ class Game
 
   def add_players(game_players = [])
     2.times do |i|
+      sleep(1)
       puts "Player #{i + 1}, please enter your name"
       name = gets.chomp
       marker = i.zero? ? 'O' : 'X'
       game_players << Player.new(name, marker)
+      puts
+      sleep(1)
       puts "#{name}, your piece is #{marker}"
+      puts
     end
     game_players
   end
@@ -68,6 +73,3 @@ class Game
     board.find_valid_row(input.to_i - 1) == false
   end
 end
-
-game = Game.new
-game.play

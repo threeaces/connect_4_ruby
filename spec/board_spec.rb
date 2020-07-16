@@ -40,6 +40,7 @@ describe Board do
       allow(default_board).to receive(:get_cell).and_return(cell_with_data)
       expect(default_board.find_valid_row(2)).to be false
     end
+
     it 'finds the lowest empty position in the column' do
       expect(default_board.find_valid_row(4)).to eq(5)
       default_board.place_piece(5, 4, 'X')
